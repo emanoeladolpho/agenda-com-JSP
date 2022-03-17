@@ -52,6 +52,7 @@ public class Controller extends HttpServlet {
 		contato.setFone(request.getParameter("fone"));
 		contato.setEmail(request.getParameter("email"));
 		dao.inserirContato(contato);
+		contato = new JavaBeans();
 		response.sendRedirect("main");
 	}
 }

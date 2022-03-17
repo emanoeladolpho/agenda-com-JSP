@@ -13,6 +13,8 @@ public class Dao {
 	}
 
 	public void inserirContato(JavaBeans contato) {
+		Long ultimoId = contatos.get(contatos.size() - 1).getId();
+		contato.setId(ultimoId + 1);
 		contatos.add(contato);
 	}
 
