@@ -1,32 +1,57 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class Controller
- */
-@WebServlet(urlPatterns = {"/Controller","/main"})
+import model.Dao;
+import model.JavaBeans;
+
+@WebServlet(urlPatterns = { "/Controller", "/main", "/insert"})
 public class Controller extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
+	JavaBeans contato = new JavaBeans();
+	Dao dao = new Dao();
 
-    /**
-     * Default constructor. 
-     */
-    public Controller() {
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public Controller() {
 	}
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String action = request.getServletPath();
+		System.out.println(action);
+		if (action.equals("/main")) {
+			contatos(request, response);
+		}else if(action.equals("/insert")) {
+			novoContato(request,response);
+		}else {
+			response.sendRedirect("index.html");
+		}
+	}
+
+	// listar contatos
+	protected void contatos(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		ArrayList<JavaBeans> contatos = dao.getContatos();
+		request.setAttribute("contatos", contatos);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("agenda.jsp");
+		requestDispatcher.forward(request, response);// envia o objeto contatos ao documento agenda.jsp
+	}	
+	
+	//novo contato
+	protected void novoContato(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		contato.setNome(request.getParameter("nome"));
+		contato.setFone(request.getParameter("fone"));
+		contato.setEmail(request.getParameter("email"));
+		dao.inserirContato(contato);
+		response.sendRedirect("main");
+	}
 }
