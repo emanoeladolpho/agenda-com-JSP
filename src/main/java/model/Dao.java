@@ -17,6 +17,10 @@ public class Dao {
 		contato.setId(ultimoId + 1);
 		contatos.add(contato);
 	}
+	
+	public void getContatoById(JavaBeans contato) {
+		contato = contatos.get(contato.getId().intValue() - 1);
+	}
 
 	public ArrayList<JavaBeans> getContatos() {
 		return contatos;

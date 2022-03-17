@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Dao;
 import model.JavaBeans;
 
-@WebServlet(urlPatterns = { "/Controller", "/main", "/insert"})
+@WebServlet(urlPatterns = { "/Controller", "/main", "/insert", "/select"})
 public class Controller extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -31,6 +31,8 @@ public class Controller extends HttpServlet {
 			contatos(request, response);
 		}else if(action.equals("/insert")) {
 			novoContato(request,response);
+		} else if(action.equals("/select")){
+			listarContatos(request,response);
 		}else {
 			response.sendRedirect("index.html");
 		}
@@ -55,4 +57,20 @@ public class Controller extends HttpServlet {
 		contato = new JavaBeans();
 		response.sendRedirect("main");
 	}
+	
+	protected void listarContatos(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		//RECEBIMENTO DO ID DO CONTATO QUE SERÁ EDITADO!
+		Long id = Long.parseLong(request.getParameter("id"));
+		contato.setId(id);
+	}
 }
+
+
+
+
+
+
+
+
+
