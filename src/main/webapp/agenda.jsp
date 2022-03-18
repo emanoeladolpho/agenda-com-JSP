@@ -20,6 +20,7 @@
 
 	<h1>Agenda de contatos</h1>
 	<a href="novo.html" class="botao">Novo contato</a>
+	<a href="index.html" class="botao">Voltar</a>
 	
 	<table id="tabela">
 	

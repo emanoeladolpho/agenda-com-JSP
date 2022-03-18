@@ -19,20 +19,22 @@ public class Dao {
 	}
 	
 	public JavaBeans getContatoById(JavaBeans contato) {
-		contato = contatos.get(contato.getId().intValue() - 1);
-		return contato;
-	}	
-	
-	public void editarContato(JavaBeans contato) {
-		contatos.set(contato.getId().intValue() - 1, contato);
-	}
-	
-	public void deletarContato(JavaBeans contato) {
 		JavaBeans contatoBuscado = contatos
 				.stream()
 				.filter(item -> item.getId().equals(contato.getId()))
 				.findFirst()
 				.orElse(null);
+		return contatoBuscado;
+	}	
+	
+	public void editarContato(JavaBeans contato) {
+		JavaBeans contatoBuscado = getContatoById(contato);
+		int index = contatos.indexOf(contatoBuscado);
+		contatos.set(index, contato);
+	}
+	
+	public void deletarContato(JavaBeans contato) {
+		JavaBeans contatoBuscado = getContatoById(contato);
 		contatos.remove(contatoBuscado);
 	}
 

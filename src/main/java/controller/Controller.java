@@ -77,6 +77,7 @@ public class Controller extends HttpServlet {
 		//Encaminhar ao documento [editar.jsp]
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("editar.jsp");
 		requestDispatcher.forward(request, response);
+		contato = new JavaBeans();
 	}
 	
 	protected void editarContato(HttpServletRequest request, HttpServletResponse response)
@@ -88,6 +89,7 @@ public class Controller extends HttpServlet {
 		dao.editarContato(contato);
 		//redirecionar para o documento agenda.jsp (atualizado as alterações)
 		response.sendRedirect("main");
+		contato = new JavaBeans();
 	}
 	
 	protected void removerContato(HttpServletRequest request, HttpServletResponse response)
