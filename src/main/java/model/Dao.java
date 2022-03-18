@@ -18,8 +18,22 @@ public class Dao {
 		contatos.add(contato);
 	}
 	
-	public void getContatoById(JavaBeans contato) {
+	public JavaBeans getContatoById(JavaBeans contato) {
 		contato = contatos.get(contato.getId().intValue() - 1);
+		return contato;
+	}	
+	
+	public void editarContato(JavaBeans contato) {
+		contatos.set(contato.getId().intValue() - 1, contato);
+	}
+	
+	public void deletarContato(JavaBeans contato) {
+		JavaBeans contatoBuscado = contatos
+				.stream()
+				.filter(item -> item.getId().equals(contato.getId()))
+				.findFirst()
+				.orElse(null);
+		contatos.remove(contatoBuscado);
 	}
 
 	public ArrayList<JavaBeans> getContatos() {

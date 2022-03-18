@@ -40,11 +40,15 @@
 					<td> <%=lista.get(i).getNome() %> </td>
 					<td> <%=lista.get(i).getFone() %> </td>
 					<td> <%=lista.get(i).getEmail() %> </td>
-					<td> <a href="select?id=<%=lista.get(i).getId() %>" class="botao">Editar</a> </td>
+					<td>
+						 <a href="select?id=<%=lista.get(i).getId() %>" class="botao">Editar</a>
+						 <a href="delete?id=<%=lista.get(i).getId() %>" onclick="confirmar(<%=lista.get(i).getId() %>)" class="botao2">Excluir</a> 
+					</td>
 				</tr>
 			<% } %>
 		</tbody>
 	
 	</table>
+	<script src="scripts/confirmador.js"></script>
 </body>
 </html>
